@@ -2,12 +2,12 @@ package Modelo;
 
 public class Aireportua {
 	private String id_aireportua;
-	private String herrialdea;
+	private String herrialde_kod;
 	private String hiria;
 
-	public Aireportua(String id_aireportua, String herrialdea, String hiria) {
+	public Aireportua(String id_aireportua, String herrialde_kod, String hiria) {
 		this.id_aireportua = id_aireportua;
-		this.herrialdea = herrialdea;
+		this.herrialde_kod = herrialde_kod;
 		this.hiria = hiria;
 	}
 
@@ -19,12 +19,12 @@ public class Aireportua {
 		this.id_aireportua = id_aireportua;
 	}
 
-	public String getHerrialdea() {
-		return herrialdea;
+	public String getHerrialde_kod() {
+		return herrialde_kod;
 	}
 
-	public void setHerrialdea(String herrialdea) {
-		this.herrialdea = herrialdea;
+	public void setHerrialde_kod(String herrialdea) {
+		this.herrialde_kod = herrialdea;
 	}
 
 	public String getHiria() {

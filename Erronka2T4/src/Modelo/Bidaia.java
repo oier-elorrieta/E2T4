@@ -1,40 +1,33 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-public class Bidaiak {
+public class Bidaia {
 	private String bidaia;
 	private String mota;
 	private int egunak;
-	private String hasiData;
-	private String amaituData;
+	private Date hasiData;
+	private Date amaituData;
 	private String herrialde;
 	private String deskripzioa;
 	private String servNoinc;
-	private ArrayList<Zerbitzuak> zerbitzuak;
+	private ArrayList<Zerbitzua> zerbitzuak;
 
-    public ArrayList<Zerbitzuak> getZerbitzuak() {
-		return zerbitzuak;
-	}
-
-	public void setZerbituzak(ArrayList<Zerbitzuak> zerbitzuak) {
-		this.zerbitzuak = zerbitzuak;
-	}
-
-	public Bidaiak() {
+	public Bidaia() {
     
     }
 
-    public Bidaiak(String viajes, String tipo, int dias, String fechaInicio, String fechaFin, String pais, String desc, String servNoinc, ArrayList<Zerbitzuak> zerbitzuak) {
-        this.bidaia = viajes;
-        this.mota = tipo;
-        this.egunak = dias;
-        this.hasiData = fechaInicio;
-        this.amaituData = fechaFin;
-        this.herrialde = pais;
-        this.deskripzioa = desc;
+    public Bidaia(String bidaia, String mota, int egunak, Date hasiData, Date amaituData, String herrialdea, String deskripzioa, String servNoinc, ArrayList<Zerbitzua> zerbitzuak) {
+        this.bidaia = bidaia;
+        this.mota = mota;
+        this.egunak = egunak;
+        this.hasiData = hasiData;
+        this.amaituData = amaituData;
+        this.herrialde = herrialdea;
+        this.deskripzioa = deskripzioa;
         this.servNoinc = servNoinc;
-        this.zerbitzuak = zerbitzuak;
+        this.zerbitzuak = new ArrayList<>();
     }
 
     public String getBidaia() {
@@ -61,20 +54,20 @@ public class Bidaiak {
         this.egunak = dias;
     }
 
-    public String getHasiData() {
+    public Date getHasiData() {
         return hasiData;
     }
 
-    public void setHasiData(String fechaInicio) {
-        this.hasiData = fechaInicio;
+    public void setHasiData(Date hasiData) {
+        this.hasiData = hasiData;
     }
 
-    public String getAmaituData() {
+    public Date getAmaituData() {
         return amaituData;
     }
 
-    public void setAmaituData(String fechaFin) {
-        this.amaituData = fechaFin;
+    public void setAmaituData(Date amaituData) {
+        this.amaituData = amaituData;
     }
 
     public String getHerrialde() {
@@ -100,6 +93,18 @@ public class Bidaiak {
     public void setServNoinc(String servNoinc) {
         this.servNoinc = servNoinc;
     }
+    
+    public ArrayList<Zerbitzua> getZerbitzuak() {
+		return zerbitzuak;
+	}
+
+	public void setZerbituzak(ArrayList<Zerbitzua> zerbitzuak) {
+		this.zerbitzuak = zerbitzuak;
+	}
+	
+	public void gehituZerbitzua(Zerbitzua z) {
+		this.zerbitzuak.add(z);
+	}
 
     @Override
     public String toString() {

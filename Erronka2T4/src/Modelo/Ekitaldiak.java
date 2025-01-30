@@ -1,12 +1,14 @@
 package Modelo;
 
+import java.util.Date;
+
 public class Ekitaldiak {
 	private String ekiIzena;
 	private String mota;
-	private String data;
+	private Date data;
 	private String prezioa;
 	
-	public Ekitaldiak(String ekiIzena, String mota, String data, String prezioa) {
+	public Ekitaldiak(String ekiIzena, String mota, Date data, String prezioa) {
 		this.ekiIzena = ekiIzena;
 		this.mota = mota;
 		this.data = data;
@@ -29,11 +31,11 @@ public class Ekitaldiak {
 		this.mota = mota;
 	}
 	
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 	
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 	

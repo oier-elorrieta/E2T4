@@ -1,16 +1,12 @@
 package Modelo;
 
 public class Herrialdea {
+	private String herrialde_kod;
 	private String izena;
-	private String kontinentea;
-	private String aireportua;
-	private String kapitala;
 	
-	public Herrialdea(String izena, String kontinentea, String aireportua, String kapitala) {
+	public Herrialdea(String izena, String herrialde_kod) {
 		this.izena = izena;
-		this.kontinentea = kontinentea;
-		this.aireportua = aireportua;
-		this.kapitala = kapitala;
+		this.herrialde_kod = herrialde_kod;
 	}
 
 	public String getIzena() {
@@ -20,35 +16,18 @@ public class Herrialdea {
 	public void setIzena(String izena) {
 		this.izena = izena;
 	}
-
-	public String getKontinentea() {
-		return kontinentea;
+	
+	public String getHerrialde_kod() {
+		return herrialde_kod;
 	}
-
-	public void setKontinentea(String kontinentea) {
-		this.kontinentea = kontinentea;
-	}
-
-	public String getAireportua() {
-		return aireportua;
-	}
-
-	public void setAireportua(String aireportua) {
-		this.aireportua = aireportua;
-	}
-
-	public String getKapitala() {
-		return kapitala;
-	}
-
-	public void setKapitala(String kapitala) {
-		this.kapitala = kapitala;
+	
+	public void setHerrialde_kod(String herrialde_kod) {
+		this.herrialde_kod = herrialde_kod;
 	}
 
 	@Override
 	public String toString() {
-		return "Herriak [izena=" + izena + ", kontinentea=" + kontinentea + ", aireportua=" + aireportua + ", kapitala="
-				+ kapitala + "]";
+		return "Herriak [izena=" + izena + ", kontinentea=" + ", aireportua=" + ", kapitala="
+				+ herrialde_kod + "]";
 	}
-	
 }

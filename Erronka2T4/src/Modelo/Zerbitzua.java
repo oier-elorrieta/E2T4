@@ -1,17 +1,19 @@
 package Modelo;
 
-public class Zerbitzuak {
+import java.util.Date;
+
+public class Zerbitzua {
 	private String hegaldiIzen;
 	private String hMota;
 	private boolean ibilbide;
 	private String portuJatorri;
-	private String portuNorako;
-	private String dataNorako;
+	private String portuJoan;
+	private Date dataJoan;
 	private String kodeHegaldiNorako;
 	private String aerolineaNorako;
 	private String horduIrteera;
 	private String demboraldiNorako;
-	private String dataItzul;
+	private Date dataItzul;
 	private String kodeHegaldiItzul;
 	private String aerolineaItzul;
 	private double prezio;
@@ -20,7 +22,7 @@ public class Zerbitzuak {
 
 	private String ekiIzena;
 	private String eMota;
-	private String data;
+	private Date data;
 	private String ePrezioa;
 
 	private String oIzena;
@@ -30,18 +32,17 @@ public class Zerbitzuak {
 	private String amaituData;
 	private double oPrezioa;
 
-	public Zerbitzuak(String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuNorako,
-			String dataNorako, String kodeHegaldiNorako, String aerolineaNorako, String horduIrteera,
-			String demboraldiNorako, String dataItzul, String kodeHegaldiItzul, String aerolineaItzul, double prezio,
-			String horduItzul, String demboraldiItzul, String ekiIzena, String eMota, String data, String ePrezioa,
+	public Zerbitzua(String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuJoan,
+			Date dataJoan, String kodeHegaldiNorako, String aerolineaNorako, String horduIrteera,
+			String demboraldiNorako, Date dataItzul, String kodeHegaldiItzul, String aerolineaItzul, double prezio,
+			String horduItzul, String demboraldiItzul, String ekiIzena, String eMota, Date data, String ePrezioa,
 			String oIzena, String logelaMota, String hiria, String hasiData, String amaituData, double oPrezioa) {
-		super();
 		this.hegaldiIzen = hegaldiIzen;
 		this.hMota = hMota;
 		this.ibilbide = ibilbide;
 		this.portuJatorri = portuJatorri;
-		this.portuNorako = portuNorako;
-		this.dataNorako = dataNorako;
+		this.portuJoan = portuJoan;
+		this.dataJoan = dataJoan;
 		this.kodeHegaldiNorako = kodeHegaldiNorako;
 		this.aerolineaNorako = aerolineaNorako;
 		this.horduIrteera = horduIrteera;
@@ -64,16 +65,15 @@ public class Zerbitzuak {
 		this.oPrezioa = oPrezioa;
 	}
 
-	public Zerbitzuak(String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuNorako,
-			String dataNorako, String kodeHegaldiNorako, String aerolineaNorako, String horduIrteera,
+	public Zerbitzua(String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuJoan,
+			Date dataJoan, String kodeHegaldiNorako, String aerolineaNorako, String horduIrteera,
 			String demboraldiNorako, double prezio) {
-		super();
 		this.hegaldiIzen = hegaldiIzen;
 		this.hMota = hMota;
 		this.ibilbide = ibilbide;
 		this.portuJatorri = portuJatorri;
-		this.portuNorako = portuNorako;
-		this.dataNorako = dataNorako;
+		this.portuJoan = portuJoan;
+		this.dataJoan = dataJoan;
 		this.kodeHegaldiNorako = kodeHegaldiNorako;
 		this.aerolineaNorako = aerolineaNorako;
 		this.horduIrteera = horduIrteera;
@@ -81,17 +81,16 @@ public class Zerbitzuak {
 		this.prezio = prezio;
 	}
 
-	public Zerbitzuak(String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuNorako,
-			String dataNorako, String kodeHegaldiNorako, String aerolineaNorako, String horduIrteera,
-			String demboraldiNorako, String dataItzul, String kodeHegaldiItzul, String aerolineaItzul, double prezio,
+	public Zerbitzua(String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuNorako,
+			Date dataNorako, String kodeHegaldiNorako, String aerolineaNorako, String horduIrteera,
+			String demboraldiNorako, Date dataItzul, String kodeHegaldiItzul, String aerolineaItzul, double prezio,
 			String horduItzul, String demboraldiItzul) {
-		super();
 		this.hegaldiIzen = hegaldiIzen;
 		this.hMota = hMota;
 		this.ibilbide = ibilbide;
 		this.portuJatorri = portuJatorri;
-		this.portuNorako = portuNorako;
-		this.dataNorako = dataNorako;
+		this.portuJoan = portuNorako;
+		this.dataJoan = dataNorako;
 		this.kodeHegaldiNorako = kodeHegaldiNorako;
 		this.aerolineaNorako = aerolineaNorako;
 		this.horduIrteera = horduIrteera;
@@ -104,17 +103,15 @@ public class Zerbitzuak {
 		this.demboraldiItzul = demboraldiItzul;
 	}
 
-	public Zerbitzuak(String ekiIzena, String eMota, String data, String ePrezioa) {
-		super();
+	public Zerbitzua(String ekiIzena, String eMota, Date data, String ePrezioa) {
 		this.ekiIzena = ekiIzena;
 		this.eMota = eMota;
 		this.data = data;
 		this.ePrezioa = ePrezioa;
 	}
 
-	public Zerbitzuak(String oIzena, String logelaMota, String hiria, String hasiData, String amaituData,
+	public Zerbitzua(String oIzena, String logelaMota, String hiria, String hasiData, String amaituData,
 			double oPrezioa) {
-		super();
 		this.oIzena = oIzena;
 		this.logelaMota = logelaMota;
 		this.hiria = hiria;
@@ -156,19 +153,19 @@ public class Zerbitzuak {
 	}
 
 	public String getPortuNorako() {
-		return portuNorako;
+		return portuJoan;
 	}
 
 	public void setPortuNorako(String portuNorako) {
-		this.portuNorako = portuNorako;
+		this.portuJoan = portuNorako;
 	}
 
-	public String getDataNorako() {
-		return dataNorako;
+	public Date getDataNorako() {
+		return dataJoan;
 	}
 
-	public void setDataNorako(String dataNorako) {
-		this.dataNorako = dataNorako;
+	public void setDataNorako(Date dataNorako) {
+		this.dataJoan = dataNorako;
 	}
 
 	public String getKodeHegaldiNorako() {
@@ -203,11 +200,11 @@ public class Zerbitzuak {
 		this.demboraldiNorako = demboraldiNorako;
 	}
 
-	public String getDataItzul() {
+	public Date getDataItzul() {
 		return dataItzul;
 	}
 
-	public void setDataItzul(String dataItzul) {
+	public void setDataItzul(Date dataItzul) {
 		this.dataItzul = dataItzul;
 	}
 
@@ -267,11 +264,11 @@ public class Zerbitzuak {
 		this.eMota = eMota;
 	}
 
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
