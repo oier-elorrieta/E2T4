@@ -1,12 +1,12 @@
 package Modelo;
 
-public class Herriak {
+public class Herrialdea {
 	private String izena;
 	private String kontinentea;
 	private String aireportua;
 	private String kapitala;
 	
-	public Herriak(String izena, String kontinentea, String aireportua, String kapitala) {
+	public Herrialdea(String izena, String kontinentea, String aireportua, String kapitala) {
 		this.izena = izena;
 		this.kontinentea = kontinentea;
 		this.aireportua = aireportua;

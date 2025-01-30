@@ -1,83 +1,96 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class Bidaiak {
-	private String viajes;
-	private String tipo;
-	private int dias;
-	private String fechaInicio;
-	private String fechaFin;
-	private String pais;
-	private String desc;
+	private String bidaia;
+	private String mota;
+	private int egunak;
+	private String hasiData;
+	private String amaituData;
+	private String herrialde;
+	private String deskripzioa;
 	private String servNoinc;
+	private ArrayList<Zerbitzuak> zerbitzuak;
 
-    public Bidaiak() {
+    public ArrayList<Zerbitzuak> getZerbitzuak() {
+		return zerbitzuak;
+	}
+
+	public void setZerbituzak(ArrayList<Zerbitzuak> zerbitzuak) {
+		this.zerbitzuak = zerbitzuak;
+	}
+
+	public Bidaiak() {
+    
     }
 
-    public Bidaiak(String viajes, String tipo, int dias, String fechaInicio, String fechaFin, String pais, String desc, String servNoinc) {
-        this.viajes = viajes;
-        this.tipo = tipo;
-        this.dias = dias;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.pais = pais;
-        this.desc = desc;
+    public Bidaiak(String viajes, String tipo, int dias, String fechaInicio, String fechaFin, String pais, String desc, String servNoinc, ArrayList<Zerbitzuak> zerbitzuak) {
+        this.bidaia = viajes;
+        this.mota = tipo;
+        this.egunak = dias;
+        this.hasiData = fechaInicio;
+        this.amaituData = fechaFin;
+        this.herrialde = pais;
+        this.deskripzioa = desc;
         this.servNoinc = servNoinc;
+        this.zerbitzuak = zerbitzuak;
     }
 
-    public String getViajes() {
-        return viajes;
+    public String getBidaia() {
+        return bidaia;
     }
 
-    public void setViajes(String viajes) {
-        this.viajes = viajes;
+    public void setBidaia(String viajes) {
+        this.bidaia = viajes;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getMota() {
+        return mota;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setMota(String tipo) {
+        this.mota = tipo;
     }
 
-    public int getDias() {
-        return dias;
+    public int getEgunak() {
+        return egunak;
     }
 
-    public void setDias(int dias) {
-        this.dias = dias;
+    public void setEgunak(int dias) {
+        this.egunak = dias;
     }
 
-    public String getFechaInicio() {
-        return fechaInicio;
+    public String getHasiData() {
+        return hasiData;
     }
 
-    public void setFechaInicio(String fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setHasiData(String fechaInicio) {
+        this.hasiData = fechaInicio;
     }
 
-    public String getFechaFin() {
-        return fechaFin;
+    public String getAmaituData() {
+        return amaituData;
     }
 
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
+    public void setAmaituData(String fechaFin) {
+        this.amaituData = fechaFin;
     }
 
-    public String getPais() {
-        return pais;
+    public String getHerrialde() {
+        return herrialde;
     }
 
-    public void setPais(String pais) {
-        this.pais = pais;
+    public void setHerrialde(String pais) {
+        this.herrialde = pais;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDeskripzioa() {
+        return deskripzioa;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDeskripzioa(String desc) {
+        this.deskripzioa = desc;
     }
 
     public String getServNoinc() {
@@ -90,14 +103,14 @@ public class Bidaiak {
 
     @Override
     public String toString() {
-        return "Viaje{" +
-                "viajes='" + viajes + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", dias=" + dias +
-                ", fechaInicio='" + fechaInicio + '\'' +
-                ", fechaFin='" + fechaFin + '\'' +
-                ", pais='" + pais + '\'' +
-                ", desc='" + desc + '\'' +
+        return "Bidaia{" +
+                "Bidaia='" + bidaia + '\'' +
+                ", mota='" + mota + '\'' +
+                ", egunak=" + egunak +
+                ", hasiData='" + hasiData + '\'' +
+                ", amaituData='" + amaituData + '\'' +
+                ", herrialde='" + herrialde + '\'' +
+                ", deskipzioa='" + deskripzioa + '\'' +
                 ", servNoinc='" + servNoinc + '\'' +
                 '}';
     }
