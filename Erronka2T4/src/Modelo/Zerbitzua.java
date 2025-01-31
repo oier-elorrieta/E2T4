@@ -3,22 +3,23 @@ package Modelo;
 import java.util.Date;
 
 public class Zerbitzua {
+	private int zerbitzu_id;
+
 	private String hegaldiIzen;
 	private String hMota;
-	private boolean ibilbide;
+	private boolean joanEtorri;
 	private String portuJatorri;
-	private String portuJoan;
+	private String portuHelmuga;
 	private Date dataJoan;
-	private String kodeHegaldiNorako;
-	private String aerolineaNorako;
+	private String aerolineaJoan;
 	private String horduIrteera;
-	private String demboraldiNorako;
+	private String iraupenJoan;
 	private Date dataItzul;
 	private String kodeHegaldiItzul;
 	private String aerolineaItzul;
 	private double prezio;
 	private String horduItzul;
-	private String demboraldiItzul;
+	private double iraupenItzuli;
 
 	private String ekiIzena;
 	private String eMota;
@@ -32,27 +33,27 @@ public class Zerbitzua {
 	private String amaituData;
 	private double oPrezioa;
 
-	public Zerbitzua(String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuJoan,
-			Date dataJoan, String kodeHegaldiNorako, String aerolineaNorako, String horduIrteera,
-			String demboraldiNorako, Date dataItzul, String kodeHegaldiItzul, String aerolineaItzul, double prezio,
-			String horduItzul, String demboraldiItzul, String ekiIzena, String eMota, Date data, String ePrezioa,
-			String oIzena, String logelaMota, String hiria, String hasiData, String amaituData, double oPrezioa) {
+	public Zerbitzua(int zerbitzu_id, String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuJoan,
+			Date dataJoan, String aerolineaNorako, String horduIrteera, String demboraldiNorako, Date dataItzul,
+			String kodeHegaldiItzul, String aerolineaItzul, double prezio, String horduItzul, double iraupenItzuli,
+			String ekiIzena, String eMota, Date data, String ePrezioa, String oIzena, String logelaMota, String hiria,
+			String hasiData, String amaituData, double oPrezioa) {
+		this.zerbitzu_id = zerbitzu_id;
 		this.hegaldiIzen = hegaldiIzen;
 		this.hMota = hMota;
-		this.ibilbide = ibilbide;
+		this.joanEtorri = ibilbide;
 		this.portuJatorri = portuJatorri;
-		this.portuJoan = portuJoan;
+		this.portuHelmuga = portuJoan;
 		this.dataJoan = dataJoan;
-		this.kodeHegaldiNorako = kodeHegaldiNorako;
-		this.aerolineaNorako = aerolineaNorako;
+		this.aerolineaJoan = aerolineaNorako;
 		this.horduIrteera = horduIrteera;
-		this.demboraldiNorako = demboraldiNorako;
+		this.iraupenJoan = demboraldiNorako;
 		this.dataItzul = dataItzul;
 		this.kodeHegaldiItzul = kodeHegaldiItzul;
 		this.aerolineaItzul = aerolineaItzul;
 		this.prezio = prezio;
 		this.horduItzul = horduItzul;
-		this.demboraldiItzul = demboraldiItzul;
+		this.iraupenItzuli = iraupenItzuli;
 		this.ekiIzena = ekiIzena;
 		this.eMota = eMota;
 		this.data = data;
@@ -65,59 +66,69 @@ public class Zerbitzua {
 		this.oPrezioa = oPrezioa;
 	}
 
-	public Zerbitzua(String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuJoan,
-			Date dataJoan, String kodeHegaldiNorako, String aerolineaNorako, String horduIrteera,
+	public Zerbitzua(int zerbitzu_id, String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuJoan,
+			Date dataJoan, String aerolineaNorako, String horduIrteera,
 			String demboraldiNorako, double prezio) {
+		this.zerbitzu_id = zerbitzu_id;
 		this.hegaldiIzen = hegaldiIzen;
 		this.hMota = hMota;
-		this.ibilbide = ibilbide;
+		this.joanEtorri = ibilbide;
 		this.portuJatorri = portuJatorri;
-		this.portuJoan = portuJoan;
+		this.portuHelmuga = portuJoan;
 		this.dataJoan = dataJoan;
-		this.kodeHegaldiNorako = kodeHegaldiNorako;
-		this.aerolineaNorako = aerolineaNorako;
+		this.aerolineaJoan = aerolineaNorako;
 		this.horduIrteera = horduIrteera;
-		this.demboraldiNorako = demboraldiNorako;
+		this.iraupenJoan = demboraldiNorako;
 		this.prezio = prezio;
 	}
 
-	public Zerbitzua(String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuNorako,
+	public Zerbitzua(int zerbitzu_id, String hegaldiIzen, String hMota, boolean ibilbide, String portuJatorri, String portuNorako,
 			Date dataNorako, String kodeHegaldiNorako, String aerolineaNorako, String horduIrteera,
 			String demboraldiNorako, Date dataItzul, String kodeHegaldiItzul, String aerolineaItzul, double prezio,
-			String horduItzul, String demboraldiItzul) {
+			String horduItzul, double iraupenItzuli) {
+		this.zerbitzu_id = zerbitzu_id;
 		this.hegaldiIzen = hegaldiIzen;
 		this.hMota = hMota;
-		this.ibilbide = ibilbide;
+		this.joanEtorri = ibilbide;
 		this.portuJatorri = portuJatorri;
-		this.portuJoan = portuNorako;
+		this.portuHelmuga = portuNorako;
 		this.dataJoan = dataNorako;
-		this.kodeHegaldiNorako = kodeHegaldiNorako;
-		this.aerolineaNorako = aerolineaNorako;
+		this.aerolineaJoan = aerolineaNorako;
 		this.horduIrteera = horduIrteera;
-		this.demboraldiNorako = demboraldiNorako;
+		this.iraupenJoan = demboraldiNorako;
 		this.dataItzul = dataItzul;
 		this.kodeHegaldiItzul = kodeHegaldiItzul;
 		this.aerolineaItzul = aerolineaItzul;
 		this.prezio = prezio;
 		this.horduItzul = horduItzul;
-		this.demboraldiItzul = demboraldiItzul;
+		this.iraupenItzuli = iraupenItzuli;
 	}
 
-	public Zerbitzua(String ekiIzena, String eMota, Date data, String ePrezioa) {
+	public Zerbitzua(int zerbitzu_id, String ekiIzena, String eMota, Date data, String ePrezioa) {
+		this.zerbitzu_id = zerbitzu_id;
 		this.ekiIzena = ekiIzena;
 		this.eMota = eMota;
 		this.data = data;
 		this.ePrezioa = ePrezioa;
 	}
 
-	public Zerbitzua(String oIzena, String logelaMota, String hiria, String hasiData, String amaituData,
+	public Zerbitzua(int zerbitzu_id, String oIzena, String logelaMota, String hiria, String hasiData, String amaituData,
 			double oPrezioa) {
+		this.zerbitzu_id = zerbitzu_id;
 		this.oIzena = oIzena;
 		this.logelaMota = logelaMota;
 		this.hiria = hiria;
 		this.hasiData = hasiData;
 		this.amaituData = amaituData;
 		this.oPrezioa = oPrezioa;
+	}
+	
+	public int getZerbitzu_id() {
+		return zerbitzu_id;
+	}
+	
+	public void setZerbitzu_id(int zerbitzu_id) {
+		this.zerbitzu_id = zerbitzu_id;
 	}
 
 	public String getHegaldiIzen() {
@@ -137,11 +148,11 @@ public class Zerbitzua {
 	}
 
 	public boolean isIbilbide() {
-		return ibilbide;
+		return joanEtorri;
 	}
 
 	public void setIbilbide(boolean ibilbide) {
-		this.ibilbide = ibilbide;
+		this.joanEtorri = ibilbide;
 	}
 
 	public String getPortuJatorri() {
@@ -153,11 +164,11 @@ public class Zerbitzua {
 	}
 
 	public String getPortuNorako() {
-		return portuJoan;
+		return portuHelmuga;
 	}
 
 	public void setPortuNorako(String portuNorako) {
-		this.portuJoan = portuNorako;
+		this.portuHelmuga = portuNorako;
 	}
 
 	public Date getDataNorako() {
@@ -168,20 +179,12 @@ public class Zerbitzua {
 		this.dataJoan = dataNorako;
 	}
 
-	public String getKodeHegaldiNorako() {
-		return kodeHegaldiNorako;
-	}
-
-	public void setKodeHegaldiNorako(String kodeHegaldiNorako) {
-		this.kodeHegaldiNorako = kodeHegaldiNorako;
-	}
-
 	public String getAerolineaNorako() {
-		return aerolineaNorako;
+		return aerolineaJoan;
 	}
 
 	public void setAerolineaNorako(String aerolineaNorako) {
-		this.aerolineaNorako = aerolineaNorako;
+		this.aerolineaJoan = aerolineaNorako;
 	}
 
 	public String getHorduIrteera() {
@@ -193,11 +196,11 @@ public class Zerbitzua {
 	}
 
 	public String getDemboraldiNorako() {
-		return demboraldiNorako;
+		return iraupenJoan;
 	}
 
 	public void setDemboraldiNorako(String demboraldiNorako) {
-		this.demboraldiNorako = demboraldiNorako;
+		this.iraupenJoan = demboraldiNorako;
 	}
 
 	public Date getDataItzul() {
@@ -240,12 +243,12 @@ public class Zerbitzua {
 		this.horduItzul = horduItzul;
 	}
 
-	public String getDemboraldiItzul() {
-		return demboraldiItzul;
+	public double getIraupenItzuli() {
+		return iraupenItzuli;
 	}
 
-	public void setDemboraldiItzul(String demboraldiItzul) {
-		this.demboraldiItzul = demboraldiItzul;
+	public void setDemboraldiItzul(double iraupenItzuli) {
+		this.iraupenItzuli = iraupenItzuli;
 	}
 
 	public String getEkiIzena() {

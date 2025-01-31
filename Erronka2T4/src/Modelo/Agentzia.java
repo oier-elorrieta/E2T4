@@ -18,8 +18,6 @@ public class Agentzia {
 		this.bidaiak = new ArrayList<>();
 	}
 
-	
-
 	public String getNombreAgencia() {
 		return aIzena;
 	}
