@@ -1,10 +1,12 @@
-package Modelo;
+package ModeloPOJOS;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Bidaia {
-	private String bidaia;
+	private int agentzia_id;
+	private int bidaia_id;
+	private String bidaia_izena;
 	private String mota;
 	private int egunak;
 	private Date hasiData;
@@ -14,12 +16,10 @@ public class Bidaia {
 	private String servNoinc;
 	private ArrayList<Zerbitzua> zerbitzuak;
 
-	public Bidaia() {
-    
-    }
-
-    public Bidaia(String bidaia, String mota, int egunak, Date hasiData, Date amaituData, String herrialdea, String deskripzioa, String servNoinc, ArrayList<Zerbitzua> zerbitzuak) {
-        this.bidaia = bidaia;
+    public Bidaia(int agentzia_id, int bidaia_id, String bidaia_izena, String mota, int egunak, Date hasiData, Date amaituData, String herrialdea, String deskripzioa, String servNoinc, ArrayList<Zerbitzua> zerbitzuak) {
+        this.agentzia_id = agentzia_id;
+    	this.bidaia_id = bidaia_id;
+    	this.bidaia_izena = bidaia_izena;
         this.mota = mota;
         this.egunak = egunak;
         this.hasiData = hasiData;
@@ -30,12 +30,27 @@ public class Bidaia {
         this.zerbitzuak = new ArrayList<>();
     }
 
-    public String getBidaia() {
-        return bidaia;
+    public int getAgentzia_id() {
+    	return agentzia_id;
+    }
+    
+    public void setAgentzia_id(int agentzia_id) {
+    	this.agentzia_id = agentzia_id;
+    }
+    public int getBidaia_id() {
+		return bidaia_id;
+	}
+
+	public void setBidaia_id(int bidaia_id) {
+		this.bidaia_id = bidaia_id;
+	}
+    
+    public String getBidaia_izena() {
+        return bidaia_izena;
     }
 
-    public void setBidaia(String viajes) {
-        this.bidaia = viajes;
+    public void setBidaia(String bidaia_izena) {
+        this.bidaia_izena = bidaia_izena;
     }
 
     public String getMota() {
@@ -106,17 +121,13 @@ public class Bidaia {
 		this.zerbitzuak.add(z);
 	}
 
-    @Override
-    public String toString() {
-        return "Bidaia{" +
-                "Bidaia='" + bidaia + '\'' +
-                ", mota='" + mota + '\'' +
-                ", egunak=" + egunak +
-                ", hasiData='" + hasiData + '\'' +
-                ", amaituData='" + amaituData + '\'' +
-                ", herrialde='" + herrialde + '\'' +
-                ", deskipzioa='" + deskripzioa + '\'' +
-                ", servNoinc='" + servNoinc + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Bidaia [agentzia_id=" + agentzia_id + ", bidaia_id=" + bidaia_id + ", bidaia_izena=" + bidaia_izena
+				+ ", mota=" + mota + ", egunak=" + egunak + ", hasiData=" + hasiData + ", amaituData=" + amaituData
+				+ ", herrialde=" + herrialde + ", deskripzioa=" + deskripzioa + ", servNoinc=" + servNoinc
+				+ ", zerbitzuak=" + zerbitzuak + "]";
+	}
+	
+	
 }

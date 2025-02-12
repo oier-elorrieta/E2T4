@@ -1,4 +1,4 @@
-package Modelo;
+package ModeloPOJOS;
 
 public class Herrialdea {
 	private String herrialde_kod;
