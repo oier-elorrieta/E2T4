@@ -15,8 +15,12 @@ import javax.swing.JComboBox;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import ModeloDAO.AgentziaDAO;
+import ModeloDAO.Agentzia_motaDAO;
 
 public class AgentziaBerria extends JPanel {
 
@@ -28,7 +32,7 @@ public class AgentziaBerria extends JPanel {
 	private JTextField passAgenTxt1;
 	private JTextField passAgenTxt2;
 
-	public AgentziaBerria(Connection conexioa) {
+	public AgentziaBerria() {
 		ArrayList<String> agenMotak = new ArrayList<String>();
 		String[] array = agenMotak.toArray(new String[0]);
 		setBounds(100, 100, 761, 488);
@@ -72,22 +76,30 @@ public class AgentziaBerria extends JPanel {
 		numEmpLb.setBounds(86, 164, 126, 21);
 		add(numEmpLb);
 
-		JComboBox numEmp = new JComboBox();
-		numEmp.setModel(new DefaultComboBoxModel(
-				new String[] { "", "2 eta 10 artean", "10 eta 100 artean", "100 eta 1000 artean" }));
+		JComboBox<String> numEmp = new JComboBox();
 		numEmp.setBounds(244, 163, 133, 22);
 		add(numEmp);
+		// For y metodo para añadir número de empleados
+		ArrayList<String> langile_kopuru = new ArrayList<>();
+		langile_kopuru = Agentzia_motaDAO.langile_kopuruKargatu();
+		for(int i = 0;i<langile_kopuru.size();i++) {
+			numEmp.addItem(langile_kopuru.get(i));
+		}
 
 		// Tipo de agencia
 		JLabel agenMotaLb = new JLabel("Agentzia mota");
 		agenMotaLb.setBounds(86, 215, 126, 21);
 		add(agenMotaLb);
-
-		JComboBox<Object> agenMota = new JComboBox();
-		agenMota.setModel(new DefaultComboBoxModel(new String[] {""}));
+		// For y metodo para añadir tipos de agnecias
+		JComboBox<String> agenMota = new JComboBox();
 		agenMota.setBounds(244, 214, 133, 22);
 		add(agenMota);
-
+		ArrayList<String> agentzia_motak = new ArrayList<>();
+		agentzia_motak = Agentzia_motaDAO.agentzia_motaKargatu();
+		for(int i=0; i<agentzia_motak.size(); i++) {
+			agenMota.addItem(agentzia_motak.get(i));
+		}
+		
 		// Logo
 		JLabel logoLb = new JLabel("Logo");
 		logoLb.setBounds(86, 269, 126, 21);
@@ -127,6 +139,7 @@ public class AgentziaBerria extends JPanel {
 		add(passAgenTxt2);
 		
 		
+		/*
 		// Listeners de botones
 		try {
 			String sql = "SELECT desk FROM agentzia_mota";
@@ -139,6 +152,7 @@ public class AgentziaBerria extends JPanel {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		*/
 		
 		kantzelatuBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -157,10 +171,16 @@ public class AgentziaBerria extends JPanel {
 				String iAgen = nomAgenTxt.getText();
 				String passAgen1 = passAgenTxt1.getText();
 				String passAgen2 = passAgenTxt2.getText();
-				String colore = codColor.getText();
-				String empKop = Integer.toString(numEmp.getSelectedIndex());
+				String colore = "#" + codColor.getText();
+				String empKop = (String) numEmp.getSelectedItem();
+				String mota = (String) agenMota.getSelectedItem();
 				String logo = logoUrl.getText();
-				
+				if(iAgen.equals("") || passAgen1.equals("") || passAgen2.equals("") || colore.equals("#") || numEmp.equals("")  || mota.equals("") || logo.equals("") ) {
+					JOptionPane.showMessageDialog(null, "Mesedez sartu informazio guztia");
+				} else  if(passAgen1.equals(passAgen2)){
+					AgentziaDAO.agentziaSartu(iAgen, passAgen1, empKop, mota, colore, logo);
+					JOptionPane.showMessageDialog(null, "Agentzia sortu da!");
+				}
 			}
 		});
 

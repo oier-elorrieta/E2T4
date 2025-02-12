@@ -8,6 +8,8 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import ModeloDAO.AgentziaDAO;
+import ModeloDAO.BidaiaDAO;
+import ModeloPOJOS.*;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,7 +22,6 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import ModeloPOJOS.Agentzia;
 
 public class LoginPantaila extends JFrame {
 
@@ -32,18 +33,18 @@ public class LoginPantaila extends JFrame {
 	private static JPanel Login = new JPanel();
 	private static JPanel background = new JPanel();
 	private static JPanel OngiEtorri = new JPanel();
-	private static Connection conexioa = AgentziaDAO.konexioa();
-	private static AgentziaBerria agentziaBerriaPanel = new AgentziaBerria(conexioa);
+	//private static Connection conexioa = AgentziaDAO.konexioa();
+	private static AgentziaBerria agentziaBerriaPanel = new AgentziaBerria();
 	
 	/**
 	 * Launch the application.
-	 * @param listaAgencias 
+	 * @param zerrendaAgentziak 
 	 */
-	public synchronized static void pantLogin(ArrayList<Agentzia> listaAgencias) {
+	public synchronized static void pantLogin(ArrayList<Agentzia> zerrendaAgentziak, ArrayList<Bidaia> zerrendaBidaiak) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginPantaila frame = new LoginPantaila(listaAgencias);
+					LoginPantaila frame = new LoginPantaila(zerrendaAgentziak, zerrendaBidaiak);
 					frame.setVisible(true);
 
 				} catch (Exception e) {
@@ -56,7 +57,7 @@ public class LoginPantaila extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginPantaila(ArrayList<Agentzia> listaAgencias) {
+	public LoginPantaila(ArrayList<Agentzia> zerrendaAgenetziak, ArrayList<Bidaia> zerrendaBidaiak) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 761, 488);
 		contentPane = new JPanel();
@@ -138,33 +139,15 @@ public class LoginPantaila extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String erabiltzailea = textAgentzia.getText();
 				String pasahitza = textPasahitza.getText();
-				
-				try {
-					Class.forName("com.mysql.jdbc.Driver");
-					
-					Connection conexioa = DriverManager.getConnection("jdbc:mysql://localhost:3307/db_erronka2", "root", "");
-					
-					Statement sentencia = conexioa.createStatement();
-					String sql = "SELECT DISTINCT Agentzia_id, erabiltzailea, pasahitza FROM agentzia";
-					ResultSet resul = sentencia.executeQuery(sql);
-					
-					while(resul.next()) {
-						if(erabiltzailea.equals(resul.getString(2)) && pasahitza.equals(resul.getString(3))) {
-							JOptionPane.showMessageDialog(null, "Sartu zara");
-							dispose();
-							vuelta = false;
-							int agentzia_id = resul.getInt("Agentzia_id");
-							HegaldiPantaila.pantViajes(conexioa, agentzia_id);
-						}
+				for(int i=0; i<zerrendaAgenetziak.size(); i++) { //Recorre el arrayList de agencias, y si el usuario y la contraseña son correctos, carga los viajes de la agencia y pasa a la siguiente pantalla.
+					Agentzia agentzia = zerrendaAgenetziak.get(i); //Esto es para ir cogiendo cada agencia del array.
+					if(erabiltzailea.equalsIgnoreCase(agentzia.getErabiltzailea()) && pasahitza.equalsIgnoreCase(agentzia.getPasahitza())) {
+						JOptionPane.showMessageDialog(null, "Sartu zara");
+						dispose();
+						agentzia.setBidaiak(BidaiaDAO.bidaiaKargatu(agentzia.getBidaiak(), agentzia.getAgentzia_id())); // Le asigna a la agencia los bidaiak cargando solo los viajes de esa agencia
+						
+						HegaldiPantaila.pantViajes(agentzia.getBidaiak()); // Llama a la siguiente pantalla y le pasa los viajes.
 					}
-					
-					resul.close();
-					sentencia.close();
-					//conexioa.close();
-				}catch(ClassNotFoundException cn){
-					cn.printStackTrace();
-				}catch(SQLException s) {
-					s.printStackTrace();
 				}
 			}
 		});

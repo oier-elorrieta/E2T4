@@ -14,7 +14,17 @@ public class Agentzia {
 
 	private ArrayList<Bidaia> bidaiak;
 
-	
+	public Agentzia(String erabiltzailea, String pasahitza, String deskripzioa, String logo,
+			String kolorea, String langileKop, String agentzia_mota_kod, ArrayList<Bidaia> bidaiak) {
+		this.erabiltzailea = erabiltzailea;
+		this.pasahitza = pasahitza;
+		this.deskripzioa = deskripzioa;
+		this.logo = logo;
+		this.kolorea = kolorea;
+		this.langileKop = langileKop;
+		this.agentzia_mota_kod = agentzia_mota_kod;
+		this.bidaiak = bidaiak;
+	}
 
 	public Agentzia(int agentzia_id, String erabiltzailea, String pasahitza, String deskripzioa, String logo,
 			String kolorea, String langileKop, String agentzia_mota_kod, ArrayList<Bidaia> bidaiak) {

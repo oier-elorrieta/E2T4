@@ -9,11 +9,14 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 
-import ModeloPOJOS.Aireportua;
+import ModeloDAO.AireportuaDAO;
+import ModeloDAO.Logela_motaDAO;
+import ModeloPOJOS.*;
 
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -131,12 +134,15 @@ public class EkitaldiBerria extends JPanel {
 		lblLogelaMota.setBounds(90, 10, 100, 25);
 		ostatuPanel.add(lblLogelaMota);
 
-		JComboBox<String> comboLogelaMota = new JComboBox<>();
+		JComboBox<String> comboLogelaMota = new JComboBox<String>();
 		comboLogelaMota.setBounds(190, 10, 150, 25);
-		comboLogelaMota.addItem("Banakakoa");
-		comboLogelaMota.addItem("Bikoitza");
-		comboLogelaMota.addItem("Hirukoitza");
 		ostatuPanel.add(comboLogelaMota);
+		ArrayList<String> logelaMotak = new ArrayList<>();
+		logelaMotak = Logela_motaDAO.logela_motaKargatu();
+		for(int i=0; i<logelaMotak.size(); i++) {
+			String logelaMota = logelaMotak.get(i);
+			comboLogelaMota.addItem(logelaMota);
+		}
 
 		JLabel lblHiria = new JLabel("Hiria");
 		lblHiria.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -233,18 +239,30 @@ public class EkitaldiBerria extends JPanel {
 			lblJatorriAireportu.setBounds(90, 30, 150, 25);
 			hegaldiMotaPanel.add(lblJatorriAireportu);
 
-			JComboBox<Aireportua> aireportuJatorri = new JComboBox<Aireportua>();
+			JComboBox<String> aireportuJatorri = new JComboBox<String>();
 			aireportuJatorri.setBounds(240, 30, 150, 25);
 			hegaldiMotaPanel.add(aireportuJatorri);
+			ArrayList<Aireportua> aireportuak = new ArrayList<>();
+			aireportuak = AireportuaDAO.aireportakKargatu();
+			for(int i=0; i<aireportuak.size(); i++) {
+				Aireportua aireportua = aireportuak.get(i);
+				aireportuJatorri.addItem(aireportua.getHiria());
+			}
 
 			JLabel lblHelmugaAireportu = new JLabel("Helmugako aireportua");
 			lblHelmugaAireportu.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			lblHelmugaAireportu.setBounds(400, 30, 150, 25);
 			hegaldiMotaPanel.add(lblHelmugaAireportu);
 
-			JComboBox<Aireportua> aireportuHelmuga = new JComboBox<Aireportua>();
+			JComboBox<String> aireportuHelmuga = new JComboBox<String>();
 			aireportuHelmuga.setBounds(550, 30, 150, 25);
 			hegaldiMotaPanel.add(aireportuHelmuga);
+			ArrayList<Aireportua> aireportuak2 = new ArrayList<>();
+			aireportuak2 = AireportuaDAO.aireportakKargatu();
+			for(int i=0; i<aireportuak2.size(); i++) {
+				Aireportua aireportua = aireportuak2.get(i);
+				aireportuHelmuga.addItem(aireportua.getHiria());
+			}
 
 			JButton btnBilatuBidaia = new JButton("Bilatu Bidaia");
 			btnBilatuBidaia.setBounds(299, 70, 150, 25);
@@ -308,18 +326,30 @@ public class EkitaldiBerria extends JPanel {
 			lblJatorriAireportu.setBounds(90, 30, 150, 25);
 			hegaldiMotaPanel.add(lblJatorriAireportu);
 
-			JComboBox<Aireportua> aireportuJatorri = new JComboBox<Aireportua>();
+			JComboBox<String> aireportuJatorri = new JComboBox<String>();
 			aireportuJatorri.setBounds(240, 30, 150, 25);
 			hegaldiMotaPanel.add(aireportuJatorri);
+			ArrayList<Aireportua> aireportuak = new ArrayList<>();
+			aireportuak = AireportuaDAO.aireportakKargatu();
+			for(int i=0; i<aireportuak.size(); i++) {
+				Aireportua aireportua = aireportuak.get(i);
+				aireportuJatorri.addItem(aireportua.getHiria());
+			}
 
 			JLabel lblHelmugaAireportu = new JLabel("Helmugako aireportua");
 			lblHelmugaAireportu.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			lblHelmugaAireportu.setBounds(400, 30, 150, 25);
 			hegaldiMotaPanel.add(lblHelmugaAireportu);
 
-			JComboBox<Aireportua> aireportuHelmuga = new JComboBox<Aireportua>();
+			JComboBox<String> aireportuHelmuga = new JComboBox<String>();
 			aireportuHelmuga.setBounds(550, 30, 150, 25);
 			hegaldiMotaPanel.add(aireportuHelmuga);
+			ArrayList<Aireportua> aireportuak2 = new ArrayList<>();
+			aireportuak2 = AireportuaDAO.aireportakKargatu();
+			for(int i=0; i<aireportuak2.size(); i++) {
+				Aireportua aireportua = aireportuak2.get(i);
+				aireportuHelmuga.addItem(aireportua.getHiria());
+			}
 
 			JButton btnBilatuBidaia = new JButton("Bilatu Bidaia");
 			btnBilatuBidaia.setBounds(299, 70, 150, 25);

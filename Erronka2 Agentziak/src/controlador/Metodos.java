@@ -7,5 +7,5 @@ import ModeloPOJOS.Bidaia;
 import java.sql.*;
 
 public class Metodos {
-
+	
 }

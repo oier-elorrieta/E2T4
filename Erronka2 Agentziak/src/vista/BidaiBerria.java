@@ -7,13 +7,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import ModeloPOJOS.Herrialdea;
+import ModeloDAO.Bidai_motaDAO;
+import ModeloDAO.HerrialdeaDAO;
+import ModeloPOJOS.*;
 
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -80,9 +85,15 @@ public class BidaiBerria extends JPanel {
 		add(textIzena);
 		textIzena.setColumns(10);
 		
-		JComboBox comboMota = new JComboBox();
+		JComboBox<String> comboMota = new JComboBox<String>();
 		comboMota.setBounds(239, 80, 194, 22);
 		add(comboMota);
+		ArrayList<String> motak = new ArrayList<>();
+		motak = Bidai_motaDAO.bidai_motaKargatu();
+		for(int i=0; i<motak.size(); i++) {
+			String mota = motak.get(i);
+			comboMota.addItem(mota);
+		}
 		
 		textHasiera = new JFormattedTextField();
 		textHasiera.setBounds(239, 125, 194, 20);
@@ -99,9 +110,15 @@ public class BidaiBerria extends JPanel {
 		textIraupen.setBounds(239, 209, 97, 20);
 		add(textIraupen);
 		
-		JComboBox<Herrialdea> comboHerrialdea = new JComboBox<Herrialdea>();
+		JComboBox<String> comboHerrialdea = new JComboBox<String>();
 		comboHerrialdea.setBounds(239, 252, 194, 22);
 		add(comboHerrialdea);
+		ArrayList<Herrialdea> herrialdeak = new ArrayList<>();
+		herrialdeak = HerrialdeaDAO.herrialdeaKargatu();
+		for(int i=0; i < herrialdeak.size(); i++) {
+			Herrialdea herrialdea = herrialdeak.get(i);
+			comboHerrialdea.addItem(herrialdea.getIzena());
+		}
 		
 		JTextArea textDeskripzioa = new JTextArea();
 		textDeskripzioa.setBounds(239, 296, 309, 115);
@@ -118,6 +135,25 @@ public class BidaiBerria extends JPanel {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HegaldiPantaila.bueltatu();
+			}
+		});
+		
+		JButton btnGorde = new JButton("Gorde");
+		btnGorde.setBounds(649, 21, 89, 23);
+		add(btnGorde);
+		btnGorde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String bidaiIzena = textIzena.getText();
+				String bidaiMota = (String) comboMota.getSelectedItem();
+				String bidaiHasi = textHasiera.getText();
+				String bidaiAmaiera = textAmaiera.getText();
+				String bidaiIraupen = textIraupen.getText();
+				String bidaiHerri = (String) comboHerrialdea.getSelectedItem();
+				String bidaiDesk = textDeskripzioa.getText();
+				String textSGZerbitzu = textSGZ.getText();
+				if(bidaiIzena.equals("") || bidaiMota.equals("") || bidaiHasi.equals("") || bidaiAmaiera.equals("") || bidaiIraupen.equals("") || bidaiHerri.equals("") || bidaiDesk.equals("") || textSGZerbitzu.equals("")) {
+					JOptionPane.showMessageDialog(null, "Sartu informazioa zati guztietan");
+				}
 			}
 		});
 	}
