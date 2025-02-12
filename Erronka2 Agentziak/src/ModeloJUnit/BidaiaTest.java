@@ -18,12 +18,14 @@ class BidaiaTest {
     @BeforeEach
     void setUp() {
         ArrayList<Zerbitzua> zerbitzuak = new ArrayList<>();
-        bidaia = new Bidaia("Mendi Ibilaldia", "Abentura", 5, new Date(), new Date(), "Euskal Herria", "Mendi ibilaldi zoragarria", "Gida zerbitzua ez dago barne", zerbitzuak);
+        bidaia = new Bidaia(1, 1, "Mendi Ibilaldia", "Abentura", 5, new Date(), new Date(), "Euskal Herria", "Mendi ibilaldi zoragarria", "Gida zerbitzua ez dago barne", zerbitzuak);
     }
 
     @Test
     void testBidaiaGetters() {
-        assertEquals("Mendi Ibilaldia", bidaia.getBidaia());
+    	assertEquals(1, bidaia.getAgentzia_id());
+    	assertEquals(1, bidaia.getBidaia_id());
+        assertEquals("Mendi Ibilaldia", bidaia.getBidaia_izena());
         assertEquals("Abentura", bidaia.getMota());
         assertEquals(5, bidaia.getEgunak());
         assertEquals("Euskal Herria", bidaia.getHerrialde());
@@ -33,6 +35,7 @@ class BidaiaTest {
 
     @Test
     void testBidaiaSetters() {
+    	bidaia.setId(1);
         bidaia.setBidaia("Hondartza Bidaia");
         bidaia.setMota("Oporrak");
         bidaia.setEgunak(7);
@@ -40,6 +43,7 @@ class BidaiaTest {
         bidaia.setDeskripzioa("Hondartzan atseden hartu");
         bidaia.setServNoinc("Gosaria ez dago barne");
         
+        assertEquals(1, bidaia.getId());
         assertEquals("Hondartza Bidaia", bidaia.getBidaia());
         assertEquals("Oporrak", bidaia.getMota());
         assertEquals(7, bidaia.getEgunak());

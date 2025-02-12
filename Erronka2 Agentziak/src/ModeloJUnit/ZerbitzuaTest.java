@@ -11,52 +11,57 @@ import ModeloPOJOS.Zerbitzua;
 
 
 class ZerbitzuaTest {
-    private Zerbitzua zerbitzua;
-    
+    private Zerbitzua zerbitzuaHegaldiJoan;
+    private Zerbitzua zerbitzuaHegaldiItzuli;
+    private Zerbitzua zerbitzuaOstatua;
+    private Zerbitzua zerbitzuaJarduera;
+
     @BeforeEach
     void setUp() {
-        zerbitzua = new Zerbitzua(1, 2, 3, "Izen Hegaldi", "Mota Hegaldi", "Jatorri Portua", "Helmuga Portua",
-                new Date(), "Norako Aerolinea", new Time(System.currentTimeMillis()), 120, 200.0);
+        Date testDate = new Date();
+        Time testTime = new Time(System.currentTimeMillis());
+        
+        zerbitzuaHegaldiJoan = new Zerbitzua(1, 101, 5001, "Flight 101", testTime, testDate, 120, 199.99, "JFK", "LAX", "AA");
+        zerbitzuaHegaldiItzuli = new Zerbitzua(1, 102, 5002, testDate, "AA", 199.99, testTime, 120);
+        zerbitzuaOstatua = new Zerbitzua(1, 103, "Hotel ABC", "Suite", "Paris", testDate, testDate, 499.99);
+        zerbitzuaJarduera = new Zerbitzua(1, 104, "Tour Eiffel", "Visita guiada", testDate, 49.99);
     }
-    
+
     @Test
-    void testGettersAndSetters() {
-        zerbitzua.setBidaia_id(10);
-        assertEquals(10, zerbitzua.getBidaia_id());
-        
-        zerbitzua.setZerbitzu_id(20);
-        assertEquals(20, zerbitzua.getZerbitzu_id());
-        
-        zerbitzua.setHegaldiId(30);
-        assertEquals(30, zerbitzua.getHegaldiId());
-        
-        zerbitzua.setHegaldiIzen("Hegaldi Berria");
-        assertEquals("Hegaldi Berria", zerbitzua.getHegaldiIzen());
-        
-        zerbitzua.sethMota("Mota Berria");
-        assertEquals("Mota Berria", zerbitzua.gethMota());
-        
-        zerbitzua.setPortuJatorri("Portu Jatorri Berria");
-        assertEquals("Portu Jatorri Berria", zerbitzua.getPortuJatorri());
-        
-        zerbitzua.setPortuHelmuga("Portu Helmuga Berria");
-        assertEquals("Portu Helmuga Berria", zerbitzua.getPortuHelmuga());
-        
-        Date newDate = new Date();
-        zerbitzua.setDataNorako(newDate);
-        assertEquals(newDate, zerbitzua.getDataNorako());
-        
-        zerbitzua.setAerolineaNorako("Aerolinea Berria");
-        assertEquals("Aerolinea Berria", zerbitzua.getAerolineaNorako());
-        
-        Time newTime = new Time(System.currentTimeMillis());
-        zerbitzua.setHorduIrteera(newTime);
-        assertEquals(newTime, zerbitzua.getHorduIrteera());
-        
-        zerbitzua.setIraupenJoan(300);
-        assertEquals(300, zerbitzua.getIraupenJoan());
-        
-        zerbitzua.setPrezio(350.0);
-        assertEquals(350.0, zerbitzua.getPrezio());
+    void testHegaldiJoanKonstruktorea() {
+        assertEquals(1, zerbitzuaHegaldiJoan.getBidaia_id());
+        assertEquals(101, zerbitzuaHegaldiJoan.getZerbitzu_id());
+        assertEquals("hegaldia", zerbitzuaHegaldiJoan.getZerbitzu_mota());
+        assertEquals("JFK", zerbitzuaHegaldiJoan.getIata_kod_jatorri());
+        assertEquals("LAX", zerbitzuaHegaldiJoan.getIata_kod_helmuga());
+        assertEquals(199.99, zerbitzuaHegaldiJoan.getZerbitzu_prezioa());
+    }
+
+    @Test
+    void testHegaldiItzuliConstructor() {
+        assertEquals(1, zerbitzuaHegaldiItzuli.getBidaia_id());
+        assertEquals(102, zerbitzuaHegaldiItzuli.getZerbitzu_id());
+        assertEquals("hegaldia", zerbitzuaHegaldiItzuli.getZerbitzu_mota());
+        assertEquals("AA", zerbitzuaHegaldiItzuli.getAerolineaItzul());
+        assertEquals(199.99, zerbitzuaHegaldiItzuli.getZerbitzu_prezioa());
+    }
+
+    @Test
+    void testOstatuaConstructor() {
+        assertEquals(1, zerbitzuaOstatua.getBidaia_id());
+        assertEquals(103, zerbitzuaOstatua.getZerbitzu_id());
+        assertEquals("ostatua", zerbitzuaOstatua.getZerbitzu_mota());
+        assertEquals("Paris", zerbitzuaOstatua.getHiria());
+        assertEquals(499.99, zerbitzuaOstatua.getZerbitzu_prezioa());
+    }
+
+    @Test
+    void testJardueraConstructor() {
+        assertEquals(1, zerbitzuaJarduera.getBidaia_id());
+        assertEquals(104, zerbitzuaJarduera.getZerbitzu_id());
+        assertEquals("jarduera", zerbitzuaJarduera.getZerbitzu_mota());
+        assertEquals("Tour Eiffel", zerbitzuaJarduera.getZerbitzu_izena());
+        assertEquals("Visita guiada", zerbitzuaJarduera.getJarduera_desk());
+        assertEquals(49.99, zerbitzuaJarduera.getZerbitzu_prezioa());
     }
 }
