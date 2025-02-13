@@ -65,7 +65,7 @@ public class ZerbitzuaDAO {
 					}else if("ostatua".equalsIgnoreCase(rs.getString("zerbitzua.zerbitzu_mota"))) {
 						Zerbitzua zerbitzua = new Zerbitzua(rs.getInt("zerbitzua.bidaia_id"), rs.getInt("zerbitzua.zerbitzua_id"), rs.getString("ostatu.izena"), rs.getString("ostatu.logela_mota_kod"), rs.getString("ostatu.hiria"), rs.getDate("ostatu.hasiera_data"), rs.getDate("ostatu.amaiera_data"), rs.getDouble("ostatu.prezioa"));
 						zerbitzuak.add(zerbitzua);
-					}else if("jarduera".equalsIgnoreCase(rs.getString("zerbitzua.zerbitzu_id"))) {
+					}else if("jarduera".equalsIgnoreCase(rs.getString("zerbitzua.zerbitzu_mota"))) {
 						Zerbitzua zerbitzua = new Zerbitzua(rs.getInt("zerbitzua.bidaia_id"), rs.getInt("zerbitzua.zerbitzua_id"), rs.getString("beste_batzuk.izena"), rs.getString("beste_batzuk.desk"), rs.getDate("beste_batzuk.data"), rs.getDouble("beste_batzuk.prezioa"));
 						zerbitzuak.add(zerbitzua);
 					}
@@ -76,6 +76,44 @@ public class ZerbitzuaDAO {
 		}
 		System.out.println(zerbitzuak.toString());
 		return zerbitzuak;
+	}
+	
+	public static ArrayList<String> logela_motaKargatu(){
+		String sql = "SELECT * FROM logela_mota";
+		ArrayList<String> motak = new ArrayList<>();
+		
+		try {
+			Connection bidaiKonexioa = DriverManager.getConnection(URL,USER,PASSWORD);//BidaiaDAO.konexioa();
+			Statement stmt = bidaiKonexioa.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				String mota = rs.getString("desk");
+				motak.add(mota);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return motak;
+	}
+	
+	public static ArrayList<String> airelineakKargatu(){
+		String sql = "SELECT izena FROM airelinea";
+		
+		ArrayList<String> airelineak = new ArrayList<>();
+		try {
+			Connection agentziaKonexioa = KonexioDAO.konexioa(); //AgentziaDAO.konexioa();
+			Statement stmt = agentziaKonexioa.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				String airelinea = new String(rs.getString("izena"));
+				airelineak.add(airelinea);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return airelineak;
 	}
 	
 	public static void zerbitzuEzabatu(int zerbitzua_id) {

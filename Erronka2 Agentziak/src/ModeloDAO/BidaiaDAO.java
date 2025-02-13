@@ -11,6 +11,7 @@ import java.util.Date;
 
 import ModeloPOJOS.Bidaia;
 import ModeloPOJOS.Zerbitzua;
+import vista.LoginPantaila;
 
 public class BidaiaDAO {
 	private static final String URL = "jdbc:mysql://localhost:3307/db_erronka2";
@@ -44,17 +45,44 @@ public class BidaiaDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 		return bidaiak;
-		/*
-		for(int i=0; i<bidaiak.size(); i++) {
-			System.out.println(bidaiak.get(i));
-			
-		}
-		*/
 	}
-
-	// Metodoa bidaiak ezabatzeko
+	
+	public static String bidai_mota_kodAtera(String mota) {
+		String sql = "SELECT bidai_mota_kod FROM bidai_mota WHERE desk = " + "'" + mota + "'";
+		String motaKod = "";
+		try {
+			Connection conn = KonexioDAO.konexioa();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				motaKod = rs.getString("bidai_mota_kod");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return motaKod;
+	}
+	
+	public static ArrayList<String> bidai_motaKargatu() {
+		String sql = "SELECT * FROM bidai_mota";
+		ArrayList<String> motak = new ArrayList<>();
+		
+		try {
+			Connection bidaiKonexioa = DriverManager.getConnection(URL,USER,PASSWORD);//BidaiaDAO.konexioa();
+			Statement stmt = bidaiKonexioa.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				String mota = rs.getString("desk");
+				motak.add(mota);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return motak;
+	}
+	
 	public static void BidaiaEzabatu(int Bidaia_Id) {
 		String sql = "DELETE FROM bidaia WHERE bidaia_id = ?";
 
@@ -65,6 +93,38 @@ public class BidaiaDAO {
 			if (filasAfectadas > 0) {
 				System.out.println("SIIIIIIIIIIIIIIIIIIIIIII");
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	//INSERTER
+	
+	public static void bidaiaSartu(String bidaiIzena, String bidaiMota, Date bidaiHasi, Date bidaiAmaiera, String bidaiIraupen, String bidaiHerri, String bidaiDesk, String textSGZerbitzu) {
+		String sql = "INSERT INTO bidaia (izena, Desk, hasiera_data, amaiera_data, agentzia_id, herrialde_kod, bidai_mota_kod)" + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		int agen_id = LoginPantaila.agentziaId();
+		try {
+			Connection conn = KonexioDAO.konexioa();
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			String herriKod = HerrialdeaDAO.herrialde_kodAtera(bidaiHerri);
+			String motaKod = BidaiaDAO.bidai_mota_kodAtera(bidaiMota);
+			stmt.setString(1, bidaiIzena);
+			stmt.setString(2, bidaiDesk);
+			java.util.Date bidaiH = new java.util.Date(); //Conversor "correcto" de date de Java a date de MySQL ft. ChatGPT :)
+			java.sql.Date bidaiHsql = new java.sql.Date(bidaiH.getTime());
+			stmt.setDate(3, bidaiHsql);
+			java.util.Date bidaiA = new java.util.Date(); //Mismo conversor
+			java.sql.Date bidaiAsql = new java.sql.Date(bidaiA.getTime());
+			stmt.setDate(4, bidaiAsql);
+			stmt.setInt(5, agen_id);
+			stmt.setString(6, herriKod);
+			stmt.setString(7, motaKod);
+			if (stmt.executeUpdate() > 0) {
+                System.out.println("AAAA");
+            } else {
+                System.out.println("NOOO");
+            }
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

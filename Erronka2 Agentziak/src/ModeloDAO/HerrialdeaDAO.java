@@ -32,4 +32,20 @@ public class HerrialdeaDAO {
 		}
 		return herrialdeak;
 	}
+	
+	public static String herrialde_kodAtera(String herrialde) {
+		String sql = "SELECT herrialde_kod FROM herrialdea WHERE izena = " + "'" + herrialde + "'";
+		String herrialdeKod = "";
+		try {
+			Connection conn = KonexioDAO.konexioa();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				herrialdeKod = rs.getString("herrialde_kod");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return herrialdeKod;
+	}
 }

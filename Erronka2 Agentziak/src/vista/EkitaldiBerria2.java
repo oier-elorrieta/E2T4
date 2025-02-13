@@ -9,19 +9,17 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 
-import ModeloDAO.*;
-import ModeloPOJOS.*;
+import ModeloPOJOS.Aireportua;
 
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.CardLayout;
 
-public class EkitaldiBerria extends JPanel {
+public class EkitaldiBerria2 extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField textIzena;
@@ -29,7 +27,7 @@ public class EkitaldiBerria extends JPanel {
 	private JPanel cardsPanel; // Panel que contendrá las "cards" (secciones)
 	private CardLayout cardLayout;
 
-	public EkitaldiBerria(ArrayList<Bidaia> bidaiak) {
+	public EkitaldiBerria2() {
 		setBounds(0, 0, 748, 584);
 		setLayout(null);
 
@@ -86,7 +84,7 @@ public class EkitaldiBerria extends JPanel {
 		add(btnAtzera);
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HegaldiPantaila.bueltatu(bidaiak);
+				HegaldiPantaila.bueltatu(null);
 			}
 		});
 	}
@@ -112,10 +110,7 @@ public class EkitaldiBerria extends JPanel {
 		hegaldiMotaPanel.setBounds(0, 34, 748, 430);
 		hegaldiMotaPanel.setLayout(null);
 		hegaldiPanel.add(hegaldiMotaPanel);
-		
-		
-		
-		
+
 		comboBidaiMota.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String bidaiMota = (String) comboBidaiMota.getSelectedItem();
@@ -136,15 +131,12 @@ public class EkitaldiBerria extends JPanel {
 		lblLogelaMota.setBounds(90, 10, 100, 25);
 		ostatuPanel.add(lblLogelaMota);
 
-		JComboBox<String> comboLogelaMota = new JComboBox<String>();
+		JComboBox<String> comboLogelaMota = new JComboBox<>();
 		comboLogelaMota.setBounds(190, 10, 150, 25);
+		comboLogelaMota.addItem("Banakakoa");
+		comboLogelaMota.addItem("Bikoitza");
+		comboLogelaMota.addItem("Hirukoitza");
 		ostatuPanel.add(comboLogelaMota);
-		ArrayList<String> logelaMotak = new ArrayList<>();
-		logelaMotak = ZerbitzuaDAO.logela_motaKargatu();
-		for(int i=0; i<logelaMotak.size(); i++) {
-			String logelaMota = logelaMotak.get(i);
-			comboLogelaMota.addItem(logelaMota);
-		}
 
 		JLabel lblHiria = new JLabel("Hiria");
 		lblHiria.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -241,30 +233,18 @@ public class EkitaldiBerria extends JPanel {
 			lblJatorriAireportu.setBounds(90, 30, 150, 25);
 			hegaldiMotaPanel.add(lblJatorriAireportu);
 
-			JComboBox<String> aireportuJatorri = new JComboBox<String>();
+			JComboBox<Aireportua> aireportuJatorri = new JComboBox<Aireportua>();
 			aireportuJatorri.setBounds(240, 30, 150, 25);
 			hegaldiMotaPanel.add(aireportuJatorri);
-			ArrayList<Aireportua> aireportuak = new ArrayList<>();
-			aireportuak = AireportuaDAO.aireportakKargatu();
-			for(int i=0; i<aireportuak.size(); i++) {
-				Aireportua aireportua = aireportuak.get(i);
-				aireportuJatorri.addItem(aireportua.getHiria());
-			}
 
 			JLabel lblHelmugaAireportu = new JLabel("Helmugako aireportua");
 			lblHelmugaAireportu.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			lblHelmugaAireportu.setBounds(400, 30, 150, 25);
 			hegaldiMotaPanel.add(lblHelmugaAireportu);
 
-			JComboBox<String> aireportuHelmuga = new JComboBox<String>();
+			JComboBox<Aireportua> aireportuHelmuga = new JComboBox<Aireportua>();
 			aireportuHelmuga.setBounds(550, 30, 150, 25);
 			hegaldiMotaPanel.add(aireportuHelmuga);
-			ArrayList<Aireportua> aireportuak2 = new ArrayList<>();
-			aireportuak2 = AireportuaDAO.aireportakKargatu();
-			for(int i=0; i<aireportuak2.size(); i++) {
-				Aireportua aireportua = aireportuak2.get(i);
-				aireportuHelmuga.addItem(aireportua.getHiria());
-			}
 
 			JButton btnBilatuBidaia = new JButton("Bilatu Bidaia");
 			btnBilatuBidaia.setBounds(299, 70, 150, 25);
@@ -297,15 +277,9 @@ public class EkitaldiBerria extends JPanel {
 			lblAirelinea.setBounds(90, 190, 100, 25);
 			hegaldiMotaPanel.add(lblAirelinea);
 
-			JComboBox<String> airelineak = new JComboBox<String>();
-			airelineak.setBounds(550, 30, 150, 25);
-			hegaldiMotaPanel.add(airelineak);
-			ArrayList<String> airelineakList = new ArrayList<>();
-			airelineakList = ZerbitzuaDAO.airelineakKargatu();
-			for(int i=0; i<airelineakList.size(); i++) {
-				String airelinea = airelineakList.get(i);
-				aireportuHelmuga.addItem(airelinea);
-			}
+			JTextField textAirelinea = new JTextField();
+			textAirelinea.setBounds(190, 190, 150, 25);
+			hegaldiMotaPanel.add(textAirelinea);
 
 			JLabel lblOrdua1 = new JLabel("Irteera-ordua");
 			lblOrdua1.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -328,55 +302,24 @@ public class EkitaldiBerria extends JPanel {
 			textIraupena1.setBounds(190, 270, 150, 25);
 			hegaldiMotaPanel.add(textIraupena1);
 			
-			JButton btnGordeHegaldia = new JButton("Gorde");
-			btnGordeHegaldia.setBounds(299, 374, 109, 45);
-			hegaldiMotaPanel.add(btnGordeHegaldia);
-			btnGordeHegaldia.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					String hIzena = textIzena.getText();
-					String hJatorriPortu = (String) aireportuJatorri.getSelectedItem();
-					String hHelmugaPortu = (String) aireportuHelmuga.getSelectedItem();
-					int hJoanData = data1.getDate();
-					String hKode = textKode1.getText();
-					String hAirelinea = (String) airelineak.getSelectedItem();
-					java.util.Date hIrteeraHordu = ordua1.getDate();
-					String hIraupena = textIraupena1.getText();
-					if(hIzena.equals("") || hJatorriPortu.equals("") || hHelmugaPortu.equals("")) {
-						//ZerbitzuaDAO.sartuZerbitzuHegaldiJoan(hIzena, hJatorriPortu, hHelmugaPortu, hJoanData, hKode, hAirelinea, hIrteeraHordu, hIraupena);
-					}
-				}
-			});
-			
 		} else if (bidaiMota.equals("Joan/Etorri")) {
 			JLabel lblJatorriAireportu = new JLabel("Jatorrizko aireportua");
 			lblJatorriAireportu.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			lblJatorriAireportu.setBounds(90, 30, 150, 25);
 			hegaldiMotaPanel.add(lblJatorriAireportu);
 
-			JComboBox<String> aireportuJatorri = new JComboBox<String>();
+			JComboBox<Aireportua> aireportuJatorri = new JComboBox<Aireportua>();
 			aireportuJatorri.setBounds(240, 30, 150, 25);
 			hegaldiMotaPanel.add(aireportuJatorri);
-			ArrayList<Aireportua> aireportuak = new ArrayList<>();
-			aireportuak = AireportuaDAO.aireportakKargatu();
-			for(int i=0; i<aireportuak.size(); i++) {
-				Aireportua aireportua = aireportuak.get(i);
-				aireportuJatorri.addItem(aireportua.getHiria());
-			}
 
 			JLabel lblHelmugaAireportu = new JLabel("Helmugako aireportua");
 			lblHelmugaAireportu.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			lblHelmugaAireportu.setBounds(400, 30, 150, 25);
 			hegaldiMotaPanel.add(lblHelmugaAireportu);
 
-			JComboBox<String> aireportuHelmuga = new JComboBox<String>();
+			JComboBox<Aireportua> aireportuHelmuga = new JComboBox<Aireportua>();
 			aireportuHelmuga.setBounds(550, 30, 150, 25);
 			hegaldiMotaPanel.add(aireportuHelmuga);
-			ArrayList<Aireportua> aireportuak2 = new ArrayList<>();
-			aireportuak2 = AireportuaDAO.aireportakKargatu();
-			for(int i=0; i<aireportuak2.size(); i++) {
-				Aireportua aireportua = aireportuak2.get(i);
-				aireportuHelmuga.addItem(aireportua.getHiria());
-			}
 
 			JButton btnBilatuBidaia = new JButton("Bilatu Bidaia");
 			btnBilatuBidaia.setBounds(299, 70, 150, 25);
@@ -485,16 +428,6 @@ public class EkitaldiBerria extends JPanel {
 			JTextField textIraupena2 = new JTextField();
 			textIraupena2.setBounds(450, 270, 150, 25);
 			hegaldiMotaPanel.add(textIraupena2);
-			
-			JButton btnGordeHegaldia = new JButton("Gorde");
-			btnGordeHegaldia.setBounds(299, 374, 109, 45);
-			hegaldiMotaPanel.add(btnGordeHegaldia);
-			/*btnGordeHegaldia.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					String hIzena = textIzena.getText();
-					String 
-				}
-			});*/
 		}
 
 		hegaldiMotaPanel.revalidate();

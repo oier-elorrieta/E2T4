@@ -18,9 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import ModeloDAO.AgentziaDAO;
-import ModeloDAO.Agentzia_motaDAO;
 
 public class AgentziaBerria extends JPanel {
 
@@ -81,7 +79,7 @@ public class AgentziaBerria extends JPanel {
 		add(numEmp);
 		// For y metodo para añadir número de empleados
 		ArrayList<String> langile_kopuru = new ArrayList<>();
-		langile_kopuru = Agentzia_motaDAO.langile_kopuruKargatu();
+		langile_kopuru = AgentziaDAO.langile_kopuruKargatu();
 		for(int i = 0;i<langile_kopuru.size();i++) {
 			numEmp.addItem(langile_kopuru.get(i));
 		}
@@ -95,7 +93,7 @@ public class AgentziaBerria extends JPanel {
 		agenMota.setBounds(244, 214, 133, 22);
 		add(agenMota);
 		ArrayList<String> agentzia_motak = new ArrayList<>();
-		agentzia_motak = Agentzia_motaDAO.agentzia_motaKargatu();
+		agentzia_motak = AgentziaDAO.agentzia_motaKargatu();
 		for(int i=0; i<agentzia_motak.size(); i++) {
 			agenMota.addItem(agentzia_motak.get(i));
 		}
@@ -162,6 +160,7 @@ public class AgentziaBerria extends JPanel {
 				numEmp.setSelectedIndex(0);
 				logoUrl.setText("");
 				LoginPantaila.bueltatu();
+				
 			}
 		});
 
@@ -197,7 +196,5 @@ public class AgentziaBerria extends JPanel {
 		});
 	}
 
-	public static boolean checkVuelta() {
-		return vuelta;
-	}
+	
 }

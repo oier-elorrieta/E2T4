@@ -29,7 +29,7 @@ public class LoginPantaila extends JFrame {
 	private JPanel contentPane;
 	private JTextField textAgentzia;
 	private JTextField textPasahitza;
-	static boolean vuelta = true;
+	private static int agen_id;
 	private static JPanel Login = new JPanel();
 	private static JPanel background = new JPanel();
 	private static JPanel OngiEtorri = new JPanel();
@@ -134,29 +134,28 @@ public class LoginPantaila extends JFrame {
 			}
 		});
 		Login.setVisible(false);
-		
 		btnHasiSaioa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String erabiltzailea = textAgentzia.getText();
 				String pasahitza = textPasahitza.getText();
+				
 				for(int i=0; i<zerrendaAgenetziak.size(); i++) { //Recorre el arrayList de agencias, y si el usuario y la contraseña son correctos, carga los viajes de la agencia y pasa a la siguiente pantalla.
 					Agentzia agentzia = zerrendaAgenetziak.get(i); //Esto es para ir cogiendo cada agencia del array.
 					if(erabiltzailea.equalsIgnoreCase(agentzia.getErabiltzailea()) && pasahitza.equalsIgnoreCase(agentzia.getPasahitza())) {
 						JOptionPane.showMessageDialog(null, "Sartu zara");
+						agen_id = agentzia.getAgentzia_id();
 						dispose();
 						agentzia.setBidaiak(BidaiaDAO.bidaiaKargatu(agentzia.getBidaiak(), agentzia.getAgentzia_id())); // Le asigna a la agencia los bidaiak cargando solo los viajes de esa agencia
-						
-						HegaldiPantaila.pantViajes(agentzia.getBidaiak()); // Llama a la siguiente pantalla y le pasa los viajes.
+						HegaldiPantaila.pantViajes(agentzia.getBidaiak(), agen_id); // Llama a la siguiente pantalla y le pasa los viajes.
 					}
 				}
 			}
 		});
 	}
 	
-	public static boolean checkVuelta() {
-		return vuelta;
+	public static int agentziaId() {
+		return agen_id;
 	}
-	
 	public static void bueltatu() {
 		Login.setVisible(true);
 	    background.setVisible(true);

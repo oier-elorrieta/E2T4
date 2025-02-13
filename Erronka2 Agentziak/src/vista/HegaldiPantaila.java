@@ -21,7 +21,6 @@ import javax.swing.JButton;
 import ModeloDAO.BidaiaDAO;
 import ModeloDAO.ZerbitzuaDAO;
 import ModeloPOJOS.*;
-
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.FileWriter;
@@ -33,18 +32,19 @@ public class HegaldiPantaila extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static JPanel HegaldiPantaila = new JPanel();
-	private static JPanel bidaiBerriaPanel = new BidaiBerria();
-	private static JPanel ekitaldiBerriaPanel = new EkitaldiBerria();
+	private static JPanel bidaiBerriaPanel = new BidaiBerria(null);
+	private static JPanel ekitaldiBerriaPanel = new EkitaldiBerria(null);
 	
-	private int bidaia_id;
+	private static int bidaia_id;
 	/**
 	 * Launch the application.
+	 * @param agen_id 
 	 */
-	public static void pantViajes(ArrayList<Bidaia> bidaiak) {
+	public static void pantViajes(ArrayList<Bidaia> bidaiak, int agen_id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HegaldiPantaila frame = new HegaldiPantaila(bidaiak);
+					HegaldiPantaila frame = new HegaldiPantaila(bidaiak, agen_id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,7 +56,7 @@ public class HegaldiPantaila extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HegaldiPantaila(ArrayList<Bidaia> bidaiak) {
+	public HegaldiPantaila(ArrayList<Bidaia> bidaiak, int agen_id) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 755, 615);
 		contentPane = new JPanel();
@@ -78,7 +78,6 @@ public class HegaldiPantaila extends JFrame {
 		
 		scrollBidaiak.setViewportView(taulaBidaiak);
 		taulaBidaiak.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
 		for(int i=0; i<bidaiak.size(); i++) { //Recorre el ArrayList de agencias 
 			Bidaia bidaia = bidaiak.get(i);
 			bidaiaTaula.addRow(new Object[] {bidaia.getBidaia_id(), bidaia.getBidaia_izena(), bidaia.getMota(), bidaia.getEgunak(), bidaia.getHasiData(), bidaia.getAmaituData(), bidaia.getHerrialde()});
@@ -105,10 +104,12 @@ public class HegaldiPantaila extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				if(!e.getValueIsAdjusting()) {
 					int aukeratua = taulaBidaiak.getSelectedRow();
+					
 					if(aukeratua != -1) {
 						Bidaia bidaia = bidaiak.get(aukeratua);
 						ArrayList<Zerbitzua> zerbitzuak = new ArrayList<>();
-						zerbitzuak = ZerbitzuaDAO.zerbitzuKargatu(bidaia.getBidaia_id());
+						int bidaiId = (bidaia.getBidaia_id());
+						zerbitzuak = ZerbitzuaDAO.zerbitzuKargatu(bidaiId);
 						zerbitzuTaula.setRowCount(0);
 						for(int i=0; i<zerbitzuak.size(); i++) {
 							Zerbitzua zerbitzua = zerbitzuak.get(i);
@@ -213,9 +214,11 @@ public class HegaldiPantaila extends JFrame {
 		});
 	}
 	
-	public static void bueltatu() {
+	public static void bueltatu(ArrayList<Bidaia> bidaiak) {
+		BidaiaDAO.bidaiaKargatu(bidaiak, bidaia_id);
 		bidaiBerriaPanel.setVisible(false);
 		ekitaldiBerriaPanel.setVisible(false);
 		HegaldiPantaila.setVisible(true);
+		
 	}
 }
