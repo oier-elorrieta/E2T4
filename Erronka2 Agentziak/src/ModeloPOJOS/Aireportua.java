@@ -1,13 +1,11 @@
-package Modelo;
+package ModeloPOJOS;
 
 public class Aireportua {
 	private String id_aireportua;
-	private String herrialde_kod;
 	private String hiria;
 
-	public Aireportua(String id_aireportua, String herrialde_kod, String hiria) {
+	public Aireportua(String id_aireportua, String hiria) {
 		this.id_aireportua = id_aireportua;
-		this.herrialde_kod = herrialde_kod;
 		this.hiria = hiria;
 	}
 
@@ -17,14 +15,6 @@ public class Aireportua {
 
 	public void setId_aireportua(String id_aireportua) {
 		this.id_aireportua = id_aireportua;
-	}
-
-	public String getHerrialde_kod() {
-		return herrialde_kod;
-	}
-
-	public void setHerrialde_kod(String herrialdea) {
-		this.herrialde_kod = herrialdea;
 	}
 
 	public String getHiria() {
